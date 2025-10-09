@@ -8,26 +8,26 @@ It includes both **supervised** (classification) and **unsupervised** (clusterin
 
 ## 📂 Project Structure
 Heart_Disease_Project/
-│── data/
+├── data/
 │ └── heart_disease.csv
-│── notebooks/
+├── notebooks/
 │ ├── 01_data_preprocessing.ipynb
 │ ├── 02_pca_analysis.ipynb
 │ ├── 03_feature_selection.ipynb
 │ ├── 04_supervised_learning.ipynb
 │ ├── 05_unsupervised_learning.ipynb
 │ └── 06_hyperparameter_tuning.ipynb
-│── models/
+├── models/
 │ └── final_model.pkl
-│── ui/
+├── ui/
 │ └── app.py
-│── deployment/
+├── deployment/
 │ └── ngrok_setup.txt
-│── results/
+├── results/
 │ └── evaluation_metrics.txt
-│── README.md
-│── requirements.txt
-│── .gitignore
+├── README.md
+├── requirements.txt
+└── .gitignore
 ---
 
 ## 🚀 Features
@@ -75,3 +75,4 @@ Artificial Intelligence & Data Science Student at Zagazig University
 Machine Learning Engineer | IEEE Member  
 
 [🌐 LinkedIn](https://www.linkedin.com/in/youssef-ebrahim) | [💻 GitHub](https://github.com/YoussefEbrahim)
+
