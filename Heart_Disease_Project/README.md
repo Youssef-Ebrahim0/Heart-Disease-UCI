@@ -59,6 +59,7 @@ See [`results/evaluation_metrics.txt`](results/evaluation_metrics.txt)
 To run the Streamlit UI:
 ```bash
 streamlit run ui/app.py
+```
 
 ## 💻 Installation & Setup
 
@@ -67,10 +68,10 @@ streamlit run ui/app.py
    git clone https://github.com/YoussefEbrahim/Heart_Disease_Project.git
    cd Heart_Disease_Project
 ====================================
-👨‍💻 Author
+## 👨‍💻 Author
 
-Youssef Ebrahim
-Artificial Intelligence & Data Science Student at Zagazig University
-Machine Learning Engineer | IEEE Member
-LinkedIn
- | GitHub
+**Youssef Ebrahim**  
+Artificial Intelligence & Data Science Student at Zagazig University  
+Machine Learning Engineer | IEEE Member  
+
+[🌐 LinkedIn](https://www.linkedin.com/in/youssef-ebrahim) | [💻 GitHub](https://github.com/YoussefEbrahim)
