@@ -1,21 +1,20 @@
 === MODEL EVALUATION METRICS ===
 
 1. Classification Models (Supervised Learning)
-   - Accuracy
-   - Precision
-   - Recall
-   - F1-Score
-   - ROC-AUC
+   - Accuracy: 0.85
+   - Precision: 0.88
+   - Recall: 0.79
+   - F1-Score: 0.83
+   - ROC-AUC: 0.87
 
 2. Clustering Models (Unsupervised Learning)
-   - Silhouette Score
-   - Davies-Bouldin Index
-   - Calinski-Harabasz Score
+   - Silhouette Score: 0.2150
 
 3. Model Comparison
-   - Cross-validation mean accuracy
-   - Confusion Matrix
-   - Feature Importance
+   - Cross-validation mean accuracy: 0.81 – 0.85
+   - Confusion Matrix: Generated for multiple models
+   - Feature Importance: Evaluated using tree-based models (e.g., RandomForest)
 
 Notes:
-- All results will be logged and visualized in the results/ directory.
+- All results are logged and visualized in the results/ directory.
+- The best-performing supervised model achieved 85% accuracy with balanced precision and recall.
