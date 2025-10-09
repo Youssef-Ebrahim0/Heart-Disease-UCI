@@ -1,0 +1,21 @@
+=== MODEL EVALUATION METRICS ===
+
+1. Classification Models (Supervised Learning)
+   - Accuracy
+   - Precision
+   - Recall
+   - F1-Score
+   - ROC-AUC
+
+2. Clustering Models (Unsupervised Learning)
+   - Silhouette Score
+   - Davies-Bouldin Index
+   - Calinski-Harabasz Score
+
+3. Model Comparison
+   - Cross-validation mean accuracy
+   - Confusion Matrix
+   - Feature Importance
+
+Notes:
+- All results will be logged and visualized in the results/ directory.
