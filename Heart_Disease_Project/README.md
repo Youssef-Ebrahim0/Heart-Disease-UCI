@@ -8,26 +8,34 @@ It includes both **supervised** (classification) and **unsupervised** (clusterin
 
 ## 📂 Project Structure
 Heart_Disease_Project/
+│
 ├── data/
-│ └── heart_disease.csv
-├── notebooks/
-│ ├── 01_data_preprocessing.ipynb
-│ ├── 02_pca_analysis.ipynb
-│ ├── 03_feature_selection.ipynb
-│ ├── 04_supervised_learning.ipynb
-│ ├── 05_unsupervised_learning.ipynb
-│ └── 06_hyperparameter_tuning.ipynb
+│   └── heart_disease.csv                 # Dataset used for training and testing
+│
+├── notebooks/                            # Jupyter notebooks for analysis and experiments
+│   ├── 01_data_preprocessing.ipynb       # Data cleaning and preprocessing
+│   ├── 02_pca_analysis.ipynb             # Principal Component Analysis (PCA)
+│   ├── 03_feature_selection.ipynb        # Feature selection techniques
+│   ├── 04_supervised_learning.ipynb      # Model training using supervised learning
+│   ├── 05_unsupervised_learning.ipynb    # Clustering and other unsupervised methods
+│   └── 06_hyperparameter_tuning.ipynb    # Model optimization
+│
 ├── models/
-│ └── final_model.pkl
+│   └── final_model.pkl                   # Saved trained model
+│
 ├── ui/
-│ └── app.py
+│   └── app.py                            # Streamlit or Flask app for model deployment
+│
 ├── deployment/
-│ └── ngrok_setup.txt
+│   └── ngrok_setup.txt                   # Instructions or setup for deploying via ngrok
+│
 ├── results/
-│ └── evaluation_metrics.txt
-├── README.md
-├── requirements.txt
-└── .gitignore
+│   └── evaluation_metrics.txt            # Model performance results and metrics
+│
+├── README.md                             # Project documentation
+├── requirements.txt                      # List of dependencies
+└── .gitignore                            # Files to be ignored by Git
+
 ---
 
 ## 🚀 Features
@@ -75,4 +83,5 @@ Artificial Intelligence & Data Science Student at Zagazig University
 Machine Learning Engineer | IEEE Member  
 
 [🌐 LinkedIn](https://www.linkedin.com/in/youssef-ebrahim) | [💻 GitHub](https://github.com/YoussefEbrahim)
+
 
