@@ -1,22 +1,12 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import os
+import seaborn as sns
+import matplotlib.pyplot as plt
+import joblib
 # Load the saved model pipeline (includes preprocessing)
 # Load trained model safely
-import subprocess
-import sys
-
-try:
-    import joblib
-except ModuleNotFoundError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "joblib"])
-    import joblib
-
-print("✅ Joblib imported successfully!")
-
 model_path = os.path.join("models", "heart_disease_rf_pipeline.pkl")
 
 if not os.path.exists(model_path):
