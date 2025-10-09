@@ -83,4 +83,4 @@ streamlit run ui/app.py
 Artificial Intelligence & Data Science Student at Zagazig University  
 Machine Learning Engineer | IEEE Member  
 
-[🌐 LinkedIn](https://www.linkedin.com/in/youssef-ebrahim) | [💻 GitHub](https://github.com/Youssef-Ebrahim0)
+[🌐 LinkedIn](https://www.linkedin.com/in/youssef-ebrahim01) | [💻 GitHub](https://github.com/Youssef-Ebrahim0)
