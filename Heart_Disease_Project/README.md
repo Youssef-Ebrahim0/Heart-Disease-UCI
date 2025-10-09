@@ -7,6 +7,7 @@ It includes both **supervised** (classification) and **unsupervised** (clusterin
 ---
 
 ## 📂 Project Structure
+```
 Heart_Disease_Project/
 │
 ├── data/
@@ -35,8 +36,8 @@ Heart_Disease_Project/
 ├── README.md                             # Project documentation
 ├── requirements.txt                      # List of dependencies
 └── .gitignore                            # Files to be ignored by Git
+```
 
----
 
 ## 🚀 Features
 - **Data Preprocessing:** Cleaning, encoding, and scaling
@@ -83,5 +84,6 @@ Artificial Intelligence & Data Science Student at Zagazig University
 Machine Learning Engineer | IEEE Member  
 
 [🌐 LinkedIn](https://www.linkedin.com/in/youssef-ebrahim) | [💻 GitHub](https://github.com/YoussefEbrahim)
+
 
 
