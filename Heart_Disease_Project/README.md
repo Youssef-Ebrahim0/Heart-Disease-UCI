@@ -60,10 +60,17 @@ To run the Streamlit UI:
 ```bash
 streamlit run ui/app.py
 
-## 👨‍💻 Author
+## 💻 Installation & Setup
 
-**Youssef Ebrahim**  
-Artificial Intelligence & Data Science Student at Zagazig University  
-Machine Learning Engineer | IEEE Member  
-[LinkedIn](https://www.linkedin.com/in/youssef-ebrahim) | [GitHub](https://github.com/YoussefEbrahim)
----
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/YoussefEbrahim/Heart_Disease_Project.git
+   cd Heart_Disease_Project
+====================================
+👨‍💻 Author
+
+Youssef Ebrahim
+Artificial Intelligence & Data Science Student at Zagazig University
+Machine Learning Engineer | IEEE Member
+LinkedIn
+ | GitHub
