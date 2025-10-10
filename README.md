@@ -74,7 +74,7 @@ streamlit run ui/app.py
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/YoussefEbrahim/Heart_Disease_Project.git
+   git clone https://github.com/Youssef-Ebrahim0/Heart_Disease_Project.git
    cd Heart_Disease_Project
 ====================================
 ## 👨‍💻 Author
