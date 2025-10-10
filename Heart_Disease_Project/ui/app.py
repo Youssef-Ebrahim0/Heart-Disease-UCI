@@ -28,13 +28,13 @@ def user_input_features():
     age = st.sidebar.slider('Age', 20, 100, 50)
     sex = st.sidebar.radio('Sex', ['Male', 'Female'])
     cp = st.sidebar.selectbox('Chest Pain Type', [
-        'typical angina', 'atypical angina', 'non-anginal', 'asymptomatic'])
+                              'typical angina', 'atypical angina', 'non-anginal', 'asymptomatic'])
     trestbps = st.sidebar.slider('Resting Blood Pressure (mmHg)', 80, 200, 120)
     chol = st.sidebar.slider('Cholesterol (mg/dL)', 100, 400, 200)
     fbs = st.sidebar.selectbox(
         'Fasting Blood Sugar > 120 mg/dL', ['True', 'False'])
-    restecg = st.sidebar.selectbox('Resting ECG', [
-        'normal', 'ST-T abnormality', 'left ventricular hypertrophy'])
+    restecg = st.sidebar.selectbox(
+        'Resting ECG', ['normal', 'ST-T abnormality', 'left ventricular hypertrophy'])
     thalach = st.sidebar.slider('Max Heart Rate Achieved', 60, 220, 150)
     exang = st.sidebar.selectbox('Exercise Induced Angina', ['True', 'False'])
     oldpeak = st.sidebar.slider(
@@ -68,8 +68,6 @@ def user_input_features():
     }
 
     features = pd.DataFrame(data, index=[0])
-
-    # Align features with model columns if available
     if hasattr(model, 'feature_names_in_'):
         features = features.reindex(
             columns=model.feature_names_in_, fill_value=0)
@@ -78,98 +76,115 @@ def user_input_features():
 
 input_df = user_input_features()
 
-# --- Prediction ---
-st.subheader("🔍 Prediction Result")
-
-prediction = model.predict(input_df)
-prediction_proba = model.predict_proba(input_df)
-
-# Handle case where model.classes_ may not be ordered
-heart_index = np.where(model.classes_ == 1)[0][0]
-prob_disease = prediction_proba[0][heart_index]
-prob_no_disease = 1 - prob_disease
-
-# Define style variables for the prediction box
-bg_color = "#f8f9fa"  # light background
-text_color = "#212529"  # dark text
-card_shadow = "rgba(33, 37, 41, 0.1)"  # subtle shadow
-bar_bg = "#e9ecef"  # bar background
-
-# Styled prediction box (theme-friendly)
-st.markdown(f"""
-<div style="
-    background-color: {bg_color};
-    color: {text_color};
-    padding: 20px;
+# --- Stylish Full-width Predict Button ---
+st.markdown("""
+<style>
+.stButton>button {
+    background-color: #f06595;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 15px 50px;
     border-radius: 15px;
-    box-shadow: 0 4px 10px {card_shadow};
-">
-<h3 style="text-align:center;">{'❤️ You may be at risk of heart disease' if prediction[0] == 1 else '💙 You are not likely to have heart disease'}</h3>
-<p><b>Probability of Heart Disease:</b> {prob_disease:.2f}</p>
-<p><b>Probability of No Heart Disease:</b> {prob_no_disease:.2f}</p>
-<div style="background:{bar_bg}; border-radius:10px; overflow:hidden; margin-top:10px;">
-    <div style="width:{prob_disease*100}%; background:#f06595; padding:5px; color:white; text-align:center;">
-        Heart Disease ({prob_disease*100:.1f}%)
-    </div>
-</div>
-<div style="background:{bar_bg}; border-radius:10px; overflow:hidden; margin-top:5px;">
-    <div style="width:{prob_no_disease*100}%; background:#4dabf7; padding:5px; color:white; text-align:center;">
-        No Disease ({prob_no_disease*100:.1f}%)
-    </div>
-</div>
-</div>
+    border: none;
+    width: 617%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s, background-color 0.2s;
+}
+.stButton>button:hover {
+    background-color: #d9437f;
+    transform: scale(1.05);
+}
+</style>
 """, unsafe_allow_html=True)
-# --- Prediction Summary (Centered Title) ---
-st.markdown(
-    "<h3 style='text-align:center; font-weight:600; letter-spacing:0.5px;'>🩺 Prediction Summary</h3>",
-    unsafe_allow_html=True
-)
 
-# Columns layout
-left_col, right_col = st.columns([1, 1])
+predict_button_clicked = st.button("🔮 Predict")
 
-with left_col:
-    st.markdown("### 💬 Health Summary")
-    if prediction[0] == 1:
-        st.warning("⚠️ The model predicts a **risk of heart disease**.")
-        st.write("Consider consulting a doctor and adopting a healthy lifestyle.")
-    else:
-        st.success("💙 Your heart seems healthy according to the model.")
-        st.write(
-            "Keep maintaining your healthy habits — regular exercise and a balanced diet!")
-    st.caption("✨ The chart on the right shows how your case compares to others.")
+# --- Prediction logic ---
+if predict_button_clicked:
+    prediction = model.predict(input_df)
+    prediction_proba = model.predict_proba(input_df)
+    heart_index = np.where(model.classes_ == 1)[0][0]
+    prob_disease = prediction_proba[0][heart_index]
+    prob_no_disease = 1 - prob_disease
 
-with right_col:
-    # --- Donut Chart ---
-    df_viz = pd.DataFrame({
-        'age': np.random.randint(29, 77, 100),
-        'num': np.random.choice([0, 1], 100)
-    })
+    # --- Styled Result Card ---
+    bg_color = "#fff0f6" if prediction[0] == 1 else "#e3f6fd"
+    text_color = "#d9437f" if prediction[0] == 1 else "#228be6"
+    card_shadow = "rgba(240,101,149,0.15)" if prediction[0] == 1 else "rgba(77,171,247,0.15)"
+    bar_bg = "#f8f9fa"
 
-    df_viz.loc[len(df_viz)] = [input_df['age'].values[0], int(prediction[0])]
-    df_viz['num'] = df_viz['num'].astype(int)
+    st.markdown(f"""
+    <div style="
+        background-color: {bg_color};
+        color: {text_color};
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px {card_shadow};
+    ">
+    <h3 style="text-align:center;">{'❤️ You may be at risk of heart disease' if prediction[0] == 1 else '💙 You are not likely to have heart disease'}</h3>
+    <p><b>Probability of Heart Disease:</b> {prob_disease:.2f}</p>
+    <p><b>Probability of No Heart Disease:</b> {prob_no_disease:.2f}</p>
+    <div style="background:{bar_bg}; border-radius:10px; overflow:hidden; margin-top:10px;">
+        <div style="width:{prob_disease*100}%; background:#f06595; padding:5px; color:white; text-align:center;">
+            Heart Disease ({prob_disease*100:.1f}%)
+        </div>
+    </div>
+    <div style="background:{bar_bg}; border-radius:10px; overflow:hidden; margin-top:5px;">
+        <div style="width:{prob_no_disease*100}%; background:#4dabf7; padding:5px; color:white; text-align:center;">
+            No Disease ({prob_no_disease*100:.1f}%)
+        </div>
+    </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    counts = df_viz['num'].value_counts().sort_index()
-    labels = ['No Disease', 'Heart Disease']
-    colors = ['#4dabf7', '#f06595']
+    # --- Prediction Summary ---
+    st.markdown("<h3 style='text-align:center; font-weight:600;'>🩺 Prediction Summary</h3>",
+                unsafe_allow_html=True)
 
-    fig, ax = plt.subplots(figsize=(3.5, 3.5))
-    wedges, _, autotexts = ax.pie(
-        counts.values,
-        labels=labels,
-        autopct='%1.1f%%',
-        colors=colors,
-        startangle=90,
-        wedgeprops={'edgecolor': 'lightgrey', 'width': 0.4}
-    )
+    left_col, right_col = st.columns(2)
+    with left_col:
+        st.markdown("### 💬 Health Summary")
+        if prediction[0] == 1:
+            st.warning("⚠️ The model predicts a **risk of heart disease**.")
+            st.write(
+                "Consider consulting a doctor and adopting a healthy lifestyle.")
+        else:
+            st.success("💙 Your heart seems healthy according to the model.")
+            st.write(
+                "Keep maintaining your healthy habits — regular exercise and a balanced diet!")
+        st.caption(
+            "✨ The chart on the right shows how your case compares to others.")
 
-    # Highlight user's slice
-    user_idx = int(prediction[0])
-    wedges[user_idx].set_edgecolor('lightgrey')
-    wedges[user_idx].set_linewidth(3)
+    with right_col:
+        df_viz = pd.DataFrame({
+            'age': np.random.randint(29, 77, 100),
+            'num': np.random.choice([0, 1], 100)
+        })
+        df_viz.loc[len(df_viz)] = [
+            input_df['age'].values[0], int(prediction[0])]
+        counts = df_viz['num'].value_counts().sort_index()
+        labels = ['No Disease', 'Heart Disease']
+        colors = ['#4dabf7', '#f06595']
 
-    for a in autotexts:
-        a.set_color("black")  # more visible in dark mode
+        fig, ax = plt.subplots(figsize=(3.5, 3.5))
+        wedges, _, autotexts = ax.pie(
+            counts.values,
+            labels=labels,
+            autopct='%1.1f%%',
+            colors=colors,
+            startangle=90,
+            wedgeprops={'edgecolor': 'lightgrey', 'width': 0.4}
+        )
+        user_idx = int(prediction[0])
+        wedges[user_idx].set_edgecolor('lightgrey')
+        wedges[user_idx].set_linewidth(3)
+        for a in autotexts:
+            a.set_color("black")
+        ax.set_title("Heart Disease Distribution",
+                     fontsize=12, fontweight='bold')
+        st.pyplot(fig)
 
-    ax.set_title("Heart Disease Distribution", fontsize=12, fontweight='bold')
-    st.pyplot(fig)
+else:
+    st.info("👈 Adjust your parameters in the sidebar and click **Predict** to see your heart disease risk.")
+
