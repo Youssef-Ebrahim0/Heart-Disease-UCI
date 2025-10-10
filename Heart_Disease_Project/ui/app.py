@@ -6,14 +6,16 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import joblib
 # Load the saved model pipeline (includes preprocessing)
-# Load trained model safely
-model_path = os.path.join("models", "heart_disease_rf_pipeline.pkl")
+# get absolute path relative to app.py
+BASE_DIR = os.path.dirname(__file__)
+model_path = os.path.abspath(os.path.join(BASE_DIR, "../models/heart_disease_rf_pipeline.pkl"))
 
 if not os.path.exists(model_path):
     raise FileNotFoundError(f"Model file not found at: {model_path}")
 
 model = joblib.load(model_path)
 print("✅ Model loaded successfully!")
+
 st.set_page_config(page_title="Heart Disease Prediction", layout="wide")
 st.title("❤️ Heart Disease Risk Prediction")
 
@@ -116,4 +118,5 @@ sns.despine(ax=ax)
 
 # Show in Streamlit
 st.pyplot(fig)
+
 
