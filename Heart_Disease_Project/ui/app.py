@@ -16,34 +16,28 @@ if not os.path.exists(model_path):
 model = joblib.load(model_path)
 print("✅ Model loaded successfully!")
 
+# --- Page Configuration ---
 st.set_page_config(page_title="Heart Disease Prediction", layout="wide")
 st.title("❤️ Heart Disease Risk Prediction")
 
 # --- Sidebar Input ---
-st.sidebar.header("Enter Your Health Data:")
-
+st.sidebar.header("Enter Your Health Data")
 
 def user_input_features():
     age = st.sidebar.slider('Age', 20, 100, 50)
-    sex = st.sidebar.selectbox('Sex', ['Male', 'Female'])
+    sex = st.sidebar.radio('Sex', ['Male', 'Female'])
     cp = st.sidebar.selectbox('Chest Pain Type', [
         'typical angina', 'atypical angina', 'non-anginal', 'asymptomatic'])
     trestbps = st.sidebar.slider('Resting Blood Pressure (mmHg)', 80, 200, 120)
     chol = st.sidebar.slider('Cholesterol (mg/dL)', 100, 400, 200)
-    fbs = st.sidebar.selectbox(
-        'Fasting Blood Sugar > 120 mg/dL', ['True', 'False'])
-    restecg = st.sidebar.selectbox(
-        'Resting ECG', ['normal', 'ST-T abnormality', 'left ventricular hypertrophy'])
+    fbs = st.sidebar.selectbox('Fasting Blood Sugar > 120 mg/dL', ['True', 'False'])
+    restecg = st.sidebar.selectbox('Resting ECG', ['normal', 'ST-T abnormality', 'left ventricular hypertrophy'])
     thalach = st.sidebar.slider('Max Heart Rate Achieved', 60, 220, 150)
     exang = st.sidebar.selectbox('Exercise Induced Angina', ['True', 'False'])
-    oldpeak = st.sidebar.slider(
-        'ST depression induced by exercise', 0.0, 10.0, 1.0)
-    slope = st.sidebar.selectbox('Slope of ST segment', [
-                                 'upsloping', 'flat', 'downsloping'])
-    ca = st.sidebar.slider(
-        'Number of major vessels colored by fluoroscopy', 0, 3, 0)
-    thal = st.sidebar.selectbox(
-        'Thalassemia', ['normal', 'fixed defect', 'reversable defect'])
+    oldpeak = st.sidebar.slider('ST depression induced by exercise', 0.0, 10.0, 1.0)
+    slope = st.sidebar.selectbox('Slope of ST segment', ['upsloping', 'flat', 'downsloping'])
+    ca = st.sidebar.slider('Number of major vessels colored by fluoroscopy', 0, 3, 0)
+    thal = st.sidebar.selectbox('Thalassemia', ['normal', 'fixed defect', 'reversable defect'])
 
     data = {
         'age': age,
@@ -68,32 +62,40 @@ def user_input_features():
 
     features = pd.DataFrame(data, index=[0])
 
-    # --- Robust feature alignment ---
+    # Feature alignment if model has feature names
     if hasattr(model, 'feature_names_in_'):
-        model_features = model.feature_names_in_
-        features = features.reindex(columns=model_features, fill_value=0)
-    else:
-        # fallback: just use the input as-is (assuming model was trained with same column order)
-        pass
-
+        features = features.reindex(columns=model.feature_names_in_, fill_value=0)
     return features
-
 
 input_df = user_input_features()
 
 # --- Prediction ---
-st.subheader("Prediction Result")
+st.subheader("🔍 Prediction Result")
 prediction = model.predict(input_df)
 prediction_proba = model.predict_proba(input_df)
 
-st.write("**Predicted Heart Disease:**",
-         "Yes ❤️" if prediction[0] == 1 else "No 💙")
-st.write("**Prediction Probability:**")
-st.write(f"Probability of Heart Disease: {prediction_proba[0][1]:.2f}")
-st.write(f"Probability of No Heart Disease: {prediction_proba[0][0]:.2f}")
+# Ensure probability index matches heart disease class
+heart_index = np.where(model.classes_ == 1)[0][0]
+prob_disease = prediction_proba[0][heart_index]
+prob_no_disease = 1 - prob_disease
 
-# --- Data Visualization (Heart Disease Distribution) ---
-st.subheader("Heart Disease Trends (Sample Dataset)")
+# Styled prediction card
+st.markdown(f"""
+<div style="background-color:#f8f9fa; padding:20px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+<h3>{'❤️ You may be at risk of heart disease' if prediction[0]==1 else '💙 You are not likely to have heart disease'}</h3>
+<p><b>Probability of Heart Disease:</b> {prob_disease:.2f}</p>
+<p><b>Probability of No Heart Disease:</b> {prob_no_disease:.2f}</p>
+<div style="background:#f1f3f5; border-radius:10px; overflow:hidden; margin-top:10px;">
+    <div style="width:{prob_disease*100}%; background:#f06595; padding:5px; color:white;">Heart Disease</div>
+</div>
+<div style="background:#f1f3f5; border-radius:10px; overflow:hidden; margin-top:5px;">
+    <div style="width:{prob_no_disease*100}%; background:#4dabf7; padding:5px; color:white;">No Disease</div>
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+# --- Heart Disease Distribution ---
+st.subheader("📊 Heart Disease Trends (Sample Dataset)")
 
 # Sample dataset
 df_viz = pd.DataFrame({
@@ -101,22 +103,22 @@ df_viz = pd.DataFrame({
     'num': np.random.choice([0, 1], 100)
 })
 
-# Smaller, professional-looking figure
-fig, ax = plt.subplots(figsize=(6, 4))  # smaller size
-sns.countplot(x='num', data=df_viz, ax=ax,
-              palette="Set2")  # nicer color palette
+# Highlight user input in distribution
+df_viz.loc[len(df_viz)] = [input_df['age'].values[0], prediction[0]]
 
-# Labels and title
-ax.set_xticks([0, 1])
+# Plot
+fig, ax = plt.subplots(figsize=(7,5))
+sns.countplot(x='num', data=df_viz, palette={0:'#4dabf7', 1:'#f06595'}, ax=ax)
+
+# Labels
+ax.set_xticks([0,1])
 ax.set_xticklabels(['No Disease', 'Heart Disease'], fontsize=12)
 ax.set_ylabel("Count", fontsize=12)
 ax.set_xlabel("Condition", fontsize=12)
 ax.set_title("Heart Disease Distribution", fontsize=14, fontweight='bold')
-
-# Remove top and right spines for cleaner look
 sns.despine(ax=ax)
 
-# Show in Streamlit
 st.pyplot(fig)
+st.markdown("💡 *Your input is highlighted in the chart above.*")
 
 
