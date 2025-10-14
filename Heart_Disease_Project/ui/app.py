@@ -79,6 +79,7 @@ input_df = user_input_features()
 # --- Stylish Full-width Predict Button ---
 st.markdown("""
 <style>
+/* Desktop styling */
 .stButton>button {
     background-color: #f06595;
     color: white;
@@ -90,10 +91,23 @@ st.markdown("""
     width: 617%;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     transition: transform 0.2s, background-color 0.2s;
+    display: block;
+    margin: 0 auto;
 }
+
+/* Hover effect */
 .stButton>button:hover {
     background-color: #d9437f;
     transform: scale(1.05);
+}
+
+/* Mobile view fix */
+@media (max-width: 768px) {
+    .stButton>button {
+        width: 100%;
+        font-size: 20px;
+        padding: 14px 30px;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -187,4 +201,5 @@ if predict_button_clicked:
 
 else:
     st.info("👈 Adjust your parameters in the sidebar and click **Predict** to see your heart disease risk.")
+
 
