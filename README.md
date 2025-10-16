@@ -83,6 +83,15 @@ Check out the live app here: [Heart Disease Prediction App](https://heart-diseas
    ```bash
    git clone https://github.com/Youssef-Ebrahim0/Heart_Disease_Project.git
    cd Heart_Disease_Project
+---
+
+## ⚠️ Disclaimer
+This project uses a machine learning model to predict the likelihood of heart disease based on input data.  
+It is intended **for educational and demonstration purposes only** and **should not be used for medical decisions**.  
+Always consult a licensed medical professional for proper diagnosis and treatment.
+
+*Results may not always be accurate or reliable.*
+
 ====================================
 ## 👨‍💻 Author
 
