@@ -69,8 +69,13 @@ To run the Streamlit UI:
 ```bash
 streamlit run ui/app.py
 ```
+
+---
+
 ## 🚀 Live Demo
-Check out the live app here: [Heart Disease Prediction App]([https://heart-disease-predict.streamlit.app](https://heart-disease-uci-8zkvt3ugghtpctd8v9kuu8.streamlit.app/))
+Check out the live app here: [Heart Disease Prediction App](https://heart-disease-uci-8zkvt3ugghtpctd8v9kuu8.streamlit.app/)
+
+---
 
 ## 💻 Installation & Setup
 
