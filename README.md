@@ -92,7 +92,8 @@ Always consult a licensed medical professional for proper diagnosis and treatmen
 
 *Predictions may contain errors or inaccuracies.*
 
-<p align="center">⋆ ─────────────── ✦ ─────────────── ⋆</p>
+<hr style="border: 0; height: 2px; background: linear-gradient(to right, rgb(240, 101, 149), rgb(77, 171, 247)); margin: 30px 35px;">
+
 <br>
 
 ## 👨‍💻 Author
