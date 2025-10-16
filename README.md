@@ -93,8 +93,8 @@ Always consult a licensed medical professional for proper diagnosis and treatmen
 *Predictions may contain errors or inaccuracies.*
 
 <p align="center">⋆ ─────────────── ✦ ─────────────── ⋆</p>
-
 <br>
+
 ## 👨‍💻 Author
 
 **Youssef Ebrahim**  
