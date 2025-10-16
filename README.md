@@ -92,7 +92,7 @@ Always consult a licensed medical professional for proper diagnosis and treatmen
 
 *Results may not always be accurate or reliable.*
 
-====================================
+<p align="center">⋆ ─────────────── ✦ ─────────────── ⋆</p>
 ## 👨‍💻 Author
 
 **Youssef Ebrahim**  
