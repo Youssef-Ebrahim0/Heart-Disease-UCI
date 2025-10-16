@@ -95,7 +95,6 @@ Always consult a licensed medical professional for proper diagnosis and treatmen
 <p align="center">⋆ ─────────────── ✦ ─────────────── ⋆</p>
 
 <br>
-
 ## 👨‍💻 Author
 
 **Youssef Ebrahim**  
