@@ -90,9 +90,12 @@ This project uses a machine learning model to predict the likelihood of heart di
 It is intended **for educational and demonstration purposes only** and **should not be used for medical decisions**.  
 Always consult a licensed medical professional for proper diagnosis and treatment.
 
-*Results may not always be accurate or reliable.*
+*Predictions may contain errors or inaccuracies.*
 
 <p align="center">⋆ ─────────────── ✦ ─────────────── ⋆</p>
+
+<br>
+
 ## 👨‍💻 Author
 
 **Youssef Ebrahim**  
