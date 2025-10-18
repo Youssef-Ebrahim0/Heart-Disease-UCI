@@ -6,11 +6,15 @@ import matplotlib.pyplot as plt
 import os
 
 # Load model
-model_path = os.path.join("models", "heart_disease_rf_pipeline.pkl")
+BASE_DIR = os.path.dirname(_file_)
+model_path = os.path.abspath(os.path.join(BASE_DIR, "../models/heart_disease_rf_pipeline.pkl"))
+
 if not os.path.exists(model_path):
-    st.error(f"❌ Model file not found at: {model_path}")
-    st.stop()
+    raise FileNotFoundError(f"Model file not found at: {model_path}")
+
 model = joblib.load(model_path)
+print("✅ Model loaded successfully!")
+
 
 # Page config
 st.set_page_config(page_title="Heart Disease Prediction",
@@ -524,3 +528,4 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
