@@ -1,17 +1,21 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib
-import matplotlib.pyplot as plt
 import os
+import seaborn as sns
+import matplotlib.pyplot as plt
+import joblib
+# Load the saved model pipeline (includes preprocessing)
+# get absolute path relative to app.py
+BASE_DIR = os.path.dirname(_file_)
+model_path = os.path.abspath(os.path.join(BASE_DIR, "../models/heart_disease_rf_pipeline.pkl"))
 
-# --- Load the saved model ---
-model_path = os.path.join("models", "heart_disease_rf_pipeline.pkl")
 if not os.path.exists(model_path):
-    st.error(f"❌ Model file not found at: {model_path}")
-    st.stop()
+    raise FileNotFoundError(f"Model file not found at: {model_path}")
 
 model = joblib.load(model_path)
+print("✅ Model loaded successfully!")
+
 
 # Page config
 st.set_page_config(page_title="Heart Disease Prediction",
