@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import joblib
 # Load the saved model pipeline (includes preprocessing)
 # get absolute path relative to app.py
-BASE_DIR = os.path.dirname(_file_)
+BASE_DIR = os.path.dirname(__file__)
 model_path = os.path.abspath(os.path.join(BASE_DIR, "../models/heart_disease_rf_pipeline.pkl"))
 
 if not os.path.exists(model_path):
@@ -529,5 +529,6 @@ st.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
